@@ -22,12 +22,13 @@ def arr_generate():
     for i in range(1,151):
         array[i]=random.randrange(1,151)
 arr_generate()
+print(array)
 
 def refill():
     surface.fill((255, 255, 255)) 
     draw() 
     pygame.display.update() 
-    pygame.time.delay(20) 
+    pygame.time.delay(1) 
 
 def draw():
     element_width =(900-150)//150
@@ -40,32 +41,13 @@ def draw():
 
 
 
-def merge(left,right):
-    result=[]
-    i,j=0,0
-    while i<len(left) and j<len(right):
-        if left[i]<right[j]:
-            result.append(left[i])
-            i+=1
-        else:
-            result.append(right[j])
-            j+=1
-    result+=left[i:]
-    result+=right[j:]
-    return result
-        
-
-
-def mergeSort(arr):
-    mid=len(arr)//2
-    if len(arr)==1:
-        refill()
-        return arr
-    else:
-        left=mergeSort(arr[:mid])
-        right=mergeSort(arr[mid:])
-        return merge(left,right)
-
+def bubble(arr):
+    for i in range(len(arr)):
+        for j in range(i+1,len(arr)):
+            if arr[i]>arr[j]:
+                arr[j],arr[i]=arr[i],arr[j]
+                refill()
+    return arr
     
 gameLoop=True
 
@@ -76,11 +58,14 @@ while gameLoop:
             gameLoop=False
         if event.type==pygame.KEYDOWN:
             if event.key==pygame.K_UP:
-                mergeSort(array)
+                print(bubble(array))
     
     draw()
     pygame.display.update()
 pygame.quit()
+
+
+
 
 
 
