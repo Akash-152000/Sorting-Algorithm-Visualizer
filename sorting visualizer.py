@@ -33,7 +33,9 @@ def draw_lines():
         pygame.draw.line(surface,color_array[i],(5*i,6),(5*i,array[i]*3),3)
     pygame.draw.line(surface,black,(0,0),(1000,0),10)
 
-##Sorting algorithm
+##Sorting algorithms
+
+##Bubble sort
 def bubbleSort(arr):
     for i in range(len(arr)):
         for j in range(i, len(arr)):
@@ -48,7 +50,23 @@ def bubbleSort(arr):
                 color_array[j]=orange
         color_array[i]=green
 
-def selectionSort(arr):
+##Selection sort
+def selectionSort(A):
+    for i in range(len(A)): 
+        min_idx = i
+        prev=min_idx
+        color_array[min_idx]=blue
+        for j in range(i+1, len(A)): 
+            if A[min_idx] > A[j]:
+                min_idx = j
+                color_array[j]=black
+                surface.fill(white)
+                draw_lines()
+                pygame.display.update()
+                color_array[prev]=green
+                color_array[j]=orange
+        A[i], A[min_idx] = A[min_idx], A[i] 
+        color_array[prev]=green
     
 
 gameLoop=True
