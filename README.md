@@ -10,13 +10,21 @@ The importance of sorting lies in the fact that data searching can be optimized 
 * Shell Sort
 * Selection Sort
 
-## Getting Started
+## If you want to run the project
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Open your cmd and go to folder where you want to download the project.
 
+For Windows use cd to change the directory.
+```
+cd Desktop\
+```
+After entering the required folder clone the repository.
+```
+
+```
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Since 
 
 ```
 Give examples
