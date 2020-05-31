@@ -39,11 +39,6 @@ For now the code contains only two sorting algorithms
 
 Other algorithms would be added soon.
 
-### Break down into end to end tests
+### For Bubble sort press :arrow_up: on your keyboard
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
+### for Selection sort press :arrow_down on your keyboard
