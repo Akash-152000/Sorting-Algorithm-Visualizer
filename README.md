@@ -41,4 +41,4 @@ Other algorithms would be added soon.
 
 ### For Bubble sort press :arrow_up: on your keyboard
 
-### for Selection sort press :arrow_down on your keyboard
+### for Selection sort press :arrow_down: on your keyboard
