@@ -69,6 +69,53 @@ def selectionSort(A):
         color_array[prev]=green
     
 
+##Merge sort
+def mergeSort(array):
+    if len(array)>1:
+        mid=len(array)//2
+        left=array[:mid]
+        right=array[mid:]
+        mergeSort(left)
+        mergeSort(right)
+        surface.fill(white)
+        draw_lines()
+        pygame.display.update()
+        i=j=k=0
+        while i<len(left) and j <len(right):
+            color_array[i]=blue
+            color_array[j]=black
+            surface.fill(white)
+            draw_lines()
+            pygame.display.update()
+            color_array[i]=green
+            color_array[j]=green
+            if left[i]<right[j]:
+                array[k]=left[i]
+                i+=1
+                k+=1
+            else:
+                array[k]=right[j]
+                j+=1
+                k+=1
+        while i<len(left):
+            color_array[i]=blue
+            surface.fill(white)
+            draw_lines()
+            pygame.display.update()
+            color_array[i]=green
+            array[k]=left[i]
+            i+=1
+            k+=1
+        while j<len(right):
+            color_array[i]=blue
+            surface.fill(white)
+            draw_lines()
+            pygame.display.update()
+            color_array[i]=green
+            array[k]=right[j]
+            j+=1
+            k+=1
+
 gameLoop=True
 while gameLoop:
     surface.fill(white)
@@ -80,11 +127,12 @@ while gameLoop:
                 bubbleSort(array)
             if event.key==pygame.K_DOWN:
                 selectionSort(array)
+            if event.key==pygame.K_LEFT:
+                mergeSort(array)
+            
     draw_lines()
     pygame.display.update()
 pygame.quit()
-
-
 
 
 
