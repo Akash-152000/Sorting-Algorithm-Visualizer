@@ -22,7 +22,10 @@ git clone https://github.com/Akash-152000/Sorting-Algorithm-Visualizer.git
 ```
 ### Prerequisites
 
-Since venv is present no need to install any library.
+Install the required libraries using the below command.
+```
+pip install -r requirements.txt
+```
 
 run the **sorting visualizer.py** file.
 
