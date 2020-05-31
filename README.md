@@ -26,31 +26,18 @@ Since venv is present no need to install any library.
 
 run the **sorting visualizer.py** file.
 
+Still incase any ImportError occurs install the **Pygame** module using pip.
 ```
-Give examples
+pip install pygame
 ```
+## Running 
 
-### Installing
+For now the code contains only two sorting algorithms
 
-A step by step series of examples that tell you how to get a development env running
+* Bubble Sort
+* Selection Sort
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
+Other algorithms would be added soon.
 
 ### Break down into end to end tests
 
