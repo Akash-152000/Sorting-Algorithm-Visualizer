@@ -10,21 +10,21 @@ The importance of sorting lies in the fact that data searching can be optimized 
 * Shell Sort
 * Selection Sort
 
-## If you want to run the project
+## Getting started
 
-Open your cmd and go to folder where you want to download the project.
+Open your terminal
 
-For Windows use cd to change the directory.
-```
-cd Desktop\
-```
-After entering the required folder clone the repository.
-```
+From a terminal window, change to the local directory where you want to clone your repository.
 
+Run the below snippet.
+```
+git clone https://github.com/Akash-152000/Sorting-Algorithm-Visualizer.git
 ```
 ### Prerequisites
 
-Since 
+Since venv is present no need to install any library.
+
+run the **sorting visualizer.py** file.
 
 ```
 Give examples
