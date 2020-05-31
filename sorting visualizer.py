@@ -16,11 +16,12 @@ grey=(211,211,211)
 color_array=[orange]*200
 array=[0]*200
 
+#Generates new array every time you press r on your keyboard.
 def generate_array():
     for i in range(1,200):
+        color_array[i]=orange
         array[i]=random.randrange(1,200)
 generate_array()
-#print(array)
 
 
 ##This Function draws 3 types of lines 
@@ -76,6 +77,8 @@ while gameLoop:
         if event.type==pygame.QUIT:
             gameLoop=False
         if event.type==pygame.KEYDOWN:
+            if event.key==pygame.K_r:
+                generate_array()
             if event.key==pygame.K_UP:
                 bubbleSort(array)
             if event.key==pygame.K_DOWN:
