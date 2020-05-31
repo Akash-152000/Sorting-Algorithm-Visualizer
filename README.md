@@ -39,6 +39,12 @@ For now the code contains only two sorting algorithms
 
 Other algorithms would be added soon.
 
-### For Bubble sort press :arrow_up: on your keyboard
+## Instructions
 
-### for Selection sort press :arrow_down: on your keyboard
+#### For Bubble sort press :arrow_up: on your keyboard
+
+#### For Selection sort press :arrow_down: on your keyboard
+
+#### Press R on your keyboard to genrate new array.
+**Note: Let the sorting of arrays done before pressing button**
+
