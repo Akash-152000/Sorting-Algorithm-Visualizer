@@ -1,74 +1,103 @@
 import pygame
 import random
-
 pygame.init()
 
-surface=pygame.display.set_mode((900,650))
-pygame.display.set_caption("Sorting visuallizer")
+surface=pygame.display.set_mode((1400,700))
+pygame.display.set_caption("Sorting visualizer")
 
-
-
-#colors
-red=(255,0,0)
+#Colours
+red=(255,99,71)
+green=(0,204,104)
 blue=(0,0,255)
-green=(0,255,0)
-white=(255,255,255)
 black=(0,0,0)
-grey=(211,211,211)
-x=10
-y=10
-array=[0]*151
-def arr_generate():
-    for i in range(1,151):
-        array[i]=random.randrange(1,151)
-arr_generate()
+orange=(255,104,0)
+white=(255,255,255)
+grey=(180,180,180)
+color_array=[orange]*200
+array=[0]*200
 
-def refill():
-    surface.fill((255, 255, 255)) 
-    draw() 
-    pygame.display.update() 
-    pygame.time.delay(20) 
+def generate_array():
+    for i in range(1,200):
+        color_array[i]=orange
+        array[i]=random.randrange(1,200)
+generate_array()
+#print(array)
 
-def draw():
-    element_width =(900-150)//150
-    pygame.draw.line(surface, (0, 0, 0),  (0, 0), (900, 0), 6) 
-    for i in range(1, 100): 
-        pygame.draw.line(surface,grey,(0, 5.5* i),(900, 5.5* i), 1)
+def redraw():
+    surface.fill(white)
+    draw_lines()
+    pygame.display.update()
+
+##This Function draws 3 types of lines 
+def draw_lines():
+    #Horizontal grey lines
+    for i in range(1,150):
+        pygame.draw.line(surface,grey,(0,5*i),(1400,5*i),1)
+
+    for i in range(1,200):
+        pygame.draw.line(surface,color_array[i],(6*i,6),(6*i,array[i]*3),5)
+    pygame.draw.line(surface,black,(0,0),(1400,0),10)
+
+##Sorting algorithms
+
+##Bubble sort
+def bubbleSort(arr):
+    for i in range(len(arr)):
+        for j in range(i, len(arr)):
+            if arr[i]>arr[j]:
+                color_array[i]=blue
+                color_array[j]=black
+                arr[i],arr[j]=arr[j],arr[i]
+                redraw()
+                color_array[i]=green
+                color_array[j]=orange
+        color_array[i]=green
+
+##Selection sort
+def selectionSort(A):
+    for i in range(len(A)): 
+        min_idx = i
+        prev=min_idx
+        color_array[min_idx]=blue
+        for j in range(i+1, len(A)): 
+            if A[min_idx] > A[j]:
+                min_idx = j
+                color_array[j]=black
+                redraw()
+                color_array[prev]=green
+                color_array[j]=orange
+        A[i], A[min_idx] = A[min_idx], A[i] 
+        color_array[prev]=green
     
-    for  i in range(1,151): 
-        pygame.draw.line(surface, red,(6 * i-3,6),(6* i-3, array[i]*3 + 6),element_width-1) 
 
-
-
-def merge(left,right):
-    result=[]
-    i,j=0,0
-    while i<len(left) and j<len(right):
-        if left[i]<right[j]:
-            result.append(left[i])
+##Merge sort
+def mergeSort(array):
+    if len(array)>1:
+        mid=len(array)//2
+        left=array[:mid]
+        right=array[mid:]
+        mergeSort(left)
+        mergeSort(right)
+        i=j=k=0
+        while i<len(left) and j <len(right):
+            if left[i]<right[j]:
+                array[k]=left[i]
+                i+=1
+                k+=1
+            else:
+                array[k]=right[j]
+                j+=1
+                k+=1
+        while i<len(left):                     
+            array[k]=left[i]
             i+=1
-        else:
-            result.append(right[j])
+            k+=1
+        while j<len(right):                     
+            array[k]=right[j]
             j+=1
-    result+=left[i:]
-    result+=right[j:]
-    return result
-        
+            k+=1
 
-
-def mergeSort(arr):
-    mid=len(arr)//2
-    if len(arr)==1:
-        refill()
-        return arr
-    else:
-        left=mergeSort(arr[:mid])
-        right=mergeSort(arr[mid:])
-        return merge(left,right)
-
-    
 gameLoop=True
-
 while gameLoop:
     surface.fill(white)
     for event in pygame.event.get():
@@ -76,11 +105,45 @@ while gameLoop:
             gameLoop=False
         if event.type==pygame.KEYDOWN:
             if event.key==pygame.K_UP:
+                bubbleSort(array)
+            if event.key==pygame.K_r:
+                generate_array()
+            if event.key==pygame.K_DOWN:
+                selectionSort(array)
+            if event.key==pygame.K_LEFT:
                 mergeSort(array)
-    
-    draw()
+            
+    draw_lines()
     pygame.display.update()
 pygame.quit()
 
-
-
+"""
+while i<len(left) and j <len(right):
+            color_array[array[i]]=blue
+            color_array[array[j]]=black
+            redraw()
+            color_array[array[i]]=green
+            color_array[array[j]]=green
+            if left[i]<right[j]:
+                array[k]=left[i]
+                i+=1
+                k+=1
+            else:
+                array[k]=right[j]
+                j+=1
+                k+=1
+        while i<len(left):
+            color_array[array[i]]=blue
+            redraw()
+            color_array[array[i]]=green
+            array[k]=left[i]
+            i+=1
+            k+=1
+        while j<len(right):
+            color_array[array[j]]=blue
+            redraw()
+            color_array[array[j]]=green
+            array[k]=right[j]
+            j+=1
+            k+=1
+"""
