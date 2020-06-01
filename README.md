@@ -37,7 +37,7 @@ pip install pygame
 ```
 ## Running 
 
-For now the code contains only two sorting algorithms
+For now the code contains only three sorting algorithms
 
 * Bubble Sort
 * Selection Sort
