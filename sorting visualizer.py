@@ -18,7 +18,7 @@ color_array=[orange]*200
 array=[0]*200
 
 
-#Generates new array every time you press r on your keyboard.iuigjyg
+#Generates new array every time you press r on your keyboard.
 def generate_array():
     for i in range(1,200):
         color_array[i]=orange
@@ -72,6 +72,55 @@ def selectionSort(A):
                 color_array[j]=orange
         A[i], A[min_idx] = A[min_idx], A[i] 
         color_array[prev]=green
+
+##Merge sort
+def mergesort(array, l, r): 
+    mid =(l + r)//2
+    if l<r: 
+        mergesort(array, l, mid) 
+        mergesort(array, mid + 1, r) 
+        merge(array, l, mid,mid + 1, r) 
+def merge(array, x1, y1, x2, y2): 
+    i = x1 
+    j = x2 
+    temp =[] 
+    while i<= y1 and j<= y2: 
+        color_array[i]=blue
+        color_array[j]=black
+        redraw()
+        color_array[i]=orange
+        color_array[j]=orange
+        if array[i]<array[j]: 
+                temp.append(array[i]) 
+                i+= 1
+        else: 
+                temp.append(array[j]) 
+                j+= 1
+    while i<= y1: 
+        color_array[i]=blue 
+        redraw() 
+        color_array[i]=orange
+        temp.append(array[i]) 
+        i+= 1
+    while j<= y2: 
+        color_array[j]=blue
+        redraw()
+        color_array[j]=orange
+        temp.append(array[j]) 
+        j+= 1
+    j = 0
+    
+    for i in range(x1, y2 + 1):   
+        array[i]= temp[j]
+        j+= 1
+        color_array[i]=orange 
+        redraw()
+        
+        if y2-x1 == len(array)-2: 
+            color_array[i]=green
+        else:     
+            color_array[i]=orange
+
     
 gameLoop=True
 while gameLoop:
@@ -86,6 +135,9 @@ while gameLoop:
                 bubbleSort(array)
             if event.key==pygame.K_DOWN:
                 selectionSort(array)
+            if event.key==pygame.K_LEFT:
+                mergesort(array, 1, len(array)-1)
+            
     draw_lines()
     pygame.display.update()
 pygame.quit()
