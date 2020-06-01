@@ -72,6 +72,84 @@ def selectionSort(A):
                 color_array[j]=orange
         A[i], A[min_idx] = A[min_idx], A[i] 
         color_array[prev]=green
+
+##Merge sort
+'''
+def mergeSort(array):
+    if len(array)>1:
+        mid=len(array)//2
+        left=array[:mid]
+        right=array[mid:]
+        mergeSort(left)
+        mergeSort(right)
+        temp=[]
+        i=j=k=0
+        while i<len(left) and j <len(right):
+            color_array[1]=blue
+            color_array[mid]=black
+            redraw()
+            color_array[1]=green
+            color_array[mid]=green
+            if left[i]<right[j]:
+                temp.append(left[i])
+                i+=1
+                k+=1
+            else:
+                temp.append(right[j])
+                j+=1
+                k+=1
+        while i<len(left):
+            
+            temp.append(left[i])
+            i+=1
+            k+=1
+        while j<len(right):
+            temp.append(right[j])
+            j+=1
+            k+=1
+'''
+
+def merge(left,right):
+    result=[]
+    i,j=0,0
+    while i<len(left) and j<len(right):
+        color_array[left[i]]=blue
+        color_array[right[j]]=black
+        redraw()
+        color_array[left[i]]=green
+        color_array[right[j]]=green
+        if left[i]<right[j]:
+            result.append(left[i])
+            i+=1
+        else:
+            result.append(right[j])
+            j+=1
+    
+    for k in range(i,len(left)):
+        color_array[k]=blue
+        result.append(left[k])
+        redraw()
+        color_array[k]=green
+    for k in range(j,len(right)):
+        color_array[k]=blue
+        result.append(right[k])
+        color_array[k]=green
+    for k in range(len(result)):
+        array[k]=result[k]
+    redraw()
+    return result
+
+def mergeSort(arr):
+    mid=len(arr)//2
+    if len(arr)==1:
+        return arr
+    else:
+        left=mergeSort(arr[:mid])
+        right=mergeSort(arr[mid:])
+        return merge(left,right)
+
+
+
     
 gameLoop=True
 while gameLoop:
@@ -86,6 +164,9 @@ while gameLoop:
                 bubbleSort(array)
             if event.key==pygame.K_DOWN:
                 selectionSort(array)
+            if event.key==pygame.K_LEFT:
+                mergeSort(array)
+            
     draw_lines()
     pygame.display.update()
 pygame.quit()
