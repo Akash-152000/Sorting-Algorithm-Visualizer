@@ -3,7 +3,7 @@ import random
 pygame.init()
 
 
-surface=pygame.display.set_mode((1400,700))
+surface=pygame.display.set_mode((1200,600))
 pygame.display.set_caption("Sorting visualizer")
 
 #Colours
@@ -14,15 +14,15 @@ black=(0,0,0)
 orange=(255,104,0)
 white=(255,255,255)
 grey=(180,180,180)
-color_array=[orange]*200
-array=[0]*200
+color_array=[orange]*150
+array=[0]*150
 
 
 #Generates new array every time you press r on your keyboard.
 def generate_array():
-    for i in range(1,200):
+    for i in range(1,150):
         color_array[i]=orange
-        array[i]=random.randrange(1,200)
+        array[i]=random.randrange(1,150)
 generate_array()
 
 def redraw():
@@ -35,13 +35,15 @@ def redraw():
 def draw_lines():
     #Horizontal grey lines
     for i in range(1,150):
-        pygame.draw.line(surface,grey,(0,5*i),(1400,5*i),1)
+        pygame.draw.line(surface,grey,(0,5*i),(900,5*i),1)
 
-    for i in range(1,200):
+    for i in range(1,150):
         pygame.draw.line(surface,color_array[i],(6*i,6),(6*i,array[i]*3),5)
-    pygame.draw.line(surface,black,(0,0),(1400,0),10)
-        
-
+    pygame.draw.rect(surface,grey,(900,0,400,600))
+    pygame.draw.line(surface,black,(0,0),(1500,0),10)#1st black line    
+    pygame.draw.line(surface,black,(900,0),(900,600),6)#1st vertical balck line
+    pygame.draw.line(surface,black,(0,600),(1500,600),10)#2nd horiontal black line
+    pygame.draw.line(surface,black,(1200,0),(1200,600),10)
 ##Sorting algorithms
 
 ##Bubble sort
@@ -121,7 +123,10 @@ def merge(array, x1, y1, x2, y2):
         else:     
             color_array[i]=orange
 
-    
+
+
+
+   
 gameLoop=True
 while gameLoop:
     surface.fill(white)
