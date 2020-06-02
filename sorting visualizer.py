@@ -3,7 +3,7 @@ import random
 pygame.init()
 
 
-surface=pygame.display.set_mode((1400,700))
+surface=pygame.display.set_mode((1200,600))
 pygame.display.set_caption("Sorting visualizer")
 
 #Colours
@@ -14,18 +14,35 @@ black=(0,0,0)
 orange=(255,104,0)
 white=(255,255,255)
 grey=(180,180,180)
-color_array=[orange]*200
-array=[0]*200
+color_array=[orange]*150
+array=[0]*150
+pygame.event.pump()
 
+
+###Displays text on buttons.
+def messageDisplay(text,font):
+    pygame.event.pump()
+    textSurf=font.render(text,True,black)
+    return textSurf, textSurf.get_rect()
+
+def text_(text,buttons):
+    pygame.event.pump()
+    font=pygame.font.Font("freesansbold.ttf",18)
+    textsurf,textrect=messageDisplay(text,font)
+    textrect.center=buttons.center
+    surface.blit(textsurf,textrect)
+    #pygame.display.update()
 
 #Generates new array every time you press r on your keyboard.
 def generate_array():
-    for i in range(1,200):
+    pygame.event.pump()
+    for i in range(1,150):
         color_array[i]=orange
-        array[i]=random.randrange(1,200)
+        array[i]=random.randrange(1,150)
 generate_array()
 
 def redraw():
+    pygame.event.pump()
     surface.fill(white)
     draw_lines()
     pygame.display.update()
@@ -33,19 +50,38 @@ def redraw():
 
 ##This Function draws 3 types of lines 
 def draw_lines():
+    pygame.event.pump()
     #Horizontal grey lines
     for i in range(1,150):
-        pygame.draw.line(surface,grey,(0,5*i),(1400,5*i),1)
+        pygame.draw.line(surface,grey,(0,5*i),(900,5*i),1)
 
-    for i in range(1,200):
+    for i in range(1,150):
         pygame.draw.line(surface,color_array[i],(6*i,6),(6*i,array[i]*3),5)
-    pygame.draw.line(surface,black,(0,0),(1400,0),10)
-        
-
+    pygame.draw.rect(surface,grey,(900,0,400,600))
+    pygame.draw.rect(surface, red, button1)
+    pygame.draw.rect(surface, red, button2)
+    pygame.draw.rect(surface, red, button3)
+    pygame.draw.rect(surface, red, button4)
+    pygame.draw.line(surface,black,(0,0),(1500,0),10)#1st black line    
+    pygame.draw.line(surface,black,(900,0),(900,600),6)#1st vertical balck line
+    pygame.draw.line(surface,black,(0,600),(1500,600),10)#2nd horiontal black line
+    pygame.draw.line(surface,black,(1200,0),(1200,600),10)#2nd Vertical black line
+    text_("Regenerate array",button1)
+    text_("Bubble Sort",button2)
+    text_("Selection Sort",button3)
+    text_("Merge Sort",button4)
+    
+##Buttons
+button1=pygame.Rect(930,30,250,30)
+button2=pygame.Rect(930,70,250,30)
+button3=pygame.Rect(930,110,250,30)
+button4=pygame.Rect(930,150,250,30)
+    
 ##Sorting algorithms
 
 ##Bubble sort
 def bubbleSort(arr):
+    pygame.event.pump()
     for i in range(len(arr)):
         for j in range(i, len(arr)):
             if arr[i]>arr[j]:
@@ -59,6 +95,7 @@ def bubbleSort(arr):
 
 ##Selection sort
 def selectionSort(A):
+    pygame.event.pump()
     for i in range(len(A)): 
         min_idx = i
         prev=min_idx
@@ -74,13 +111,15 @@ def selectionSort(A):
         color_array[prev]=green
 
 ##Merge sort
-def mergesort(array, l, r): 
+def mergesort(array, l, r):
+    pygame.event.pump()
     mid =(l + r)//2
     if l<r: 
         mergesort(array, l, mid) 
         mergesort(array, mid + 1, r) 
         merge(array, l, mid,mid + 1, r) 
-def merge(array, x1, y1, x2, y2): 
+def merge(array, x1, y1, x2, y2):
+    pygame.event.pump()
     i = x1 
     j = x2 
     temp =[] 
@@ -121,9 +160,13 @@ def merge(array, x1, y1, x2, y2):
         else:     
             color_array[i]=orange
 
-    
+
+
+
+   
 gameLoop=True
 while gameLoop:
+    pygame.event.pump()
     surface.fill(white)
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
@@ -137,7 +180,28 @@ while gameLoop:
                 selectionSort(array)
             if event.key==pygame.K_LEFT:
                 mergesort(array, 1, len(array)-1)
-            
+
+                
+        if event.type==pygame.MOUSEBUTTONDOWN:
+            mouse_pos=event.pos
+            if button1.collidepoint(mouse_pos):
+                if event.button==1:
+                    generate_array()
+
+            if button2.collidepoint(mouse_pos):
+                if event.button==1:
+                    bubbleSort(array)
+
+            if button3.collidepoint(mouse_pos):
+                if event.button==1:
+                    selectionSort(array)
+
+            if button4.collidepoint(mouse_pos):
+                if event.button==1:
+                    mergesort(array, 1, len(array)-1)
+
+                    
+    #pygame.draw.rect(surface, [255, 0, 0], button1)  
     draw_lines()
     pygame.display.update()
 pygame.quit()
