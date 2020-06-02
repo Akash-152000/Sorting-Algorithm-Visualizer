@@ -40,10 +40,22 @@ def draw_lines():
     for i in range(1,150):
         pygame.draw.line(surface,color_array[i],(6*i,6),(6*i,array[i]*3),5)
     pygame.draw.rect(surface,grey,(900,0,400,600))
+    pygame.draw.rect(surface, red, button1)
+    pygame.draw.rect(surface, red, button2)
+    pygame.draw.rect(surface, red, button3)
+    pygame.draw.rect(surface, red, button4)
     pygame.draw.line(surface,black,(0,0),(1500,0),10)#1st black line    
     pygame.draw.line(surface,black,(900,0),(900,600),6)#1st vertical balck line
     pygame.draw.line(surface,black,(0,600),(1500,600),10)#2nd horiontal black line
-    pygame.draw.line(surface,black,(1200,0),(1200,600),10)
+    pygame.draw.line(surface,black,(1200,0),(1200,600),10)#2nd Vertical black line
+
+
+##Buttons
+button1=pygame.Rect(930,30,250,30)
+button2=pygame.Rect(930,70,250,30)
+button3=pygame.Rect(930,110,250,30)
+button4=pygame.Rect(930,150,250,30)
+    
 ##Sorting algorithms
 
 ##Bubble sort
@@ -142,7 +154,26 @@ while gameLoop:
                 selectionSort(array)
             if event.key==pygame.K_LEFT:
                 mergesort(array, 1, len(array)-1)
-            
+        if event.type==pygame.MOUSEBUTTONDOWN:
+            mouse_pos=event.pos
+            if button1.collidepoint(mouse_pos):
+                if event.button==1:
+                    generate_array()
+
+            if button2.collidepoint(mouse_pos):
+                if event.button==1:
+                    bubbleSort(array)
+
+            if button3.collidepoint(mouse_pos):
+                if event.button==1:
+                    selectionSort(array)
+
+            if button4.collidepoint(mouse_pos):
+                if event.button==1:
+                    mergesort(array, 1, len(array)-1)
+
+                    
+    #pygame.draw.rect(surface, [255, 0, 0], button1)  
     draw_lines()
     pygame.display.update()
 pygame.quit()
