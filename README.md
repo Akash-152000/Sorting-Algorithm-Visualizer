@@ -42,7 +42,7 @@ For now the code contains only three sorting algorithms
 * Bubble Sort
 * Selection Sort
 * Merge Sort
-
+**Other algorithms would be added soon,contributions are most welcome**
 ## Instructions
 
 **You can press the buttons on the window for respective sorting**
