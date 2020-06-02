@@ -16,15 +16,17 @@ white=(255,255,255)
 grey=(180,180,180)
 color_array=[orange]*150
 array=[0]*150
-
+pygame.event.pump()
 
 
 ###Displays text on buttons.
 def messageDisplay(text,font):
+    pygame.event.pump()
     textSurf=font.render(text,True,black)
     return textSurf, textSurf.get_rect()
 
 def text_(text,buttons):
+    pygame.event.pump()
     font=pygame.font.Font("freesansbold.ttf",18)
     textsurf,textrect=messageDisplay(text,font)
     textrect.center=buttons.center
@@ -33,12 +35,14 @@ def text_(text,buttons):
 
 #Generates new array every time you press r on your keyboard.
 def generate_array():
+    pygame.event.pump()
     for i in range(1,150):
         color_array[i]=orange
         array[i]=random.randrange(1,150)
 generate_array()
 
 def redraw():
+    pygame.event.pump()
     surface.fill(white)
     draw_lines()
     pygame.display.update()
@@ -46,6 +50,7 @@ def redraw():
 
 ##This Function draws 3 types of lines 
 def draw_lines():
+    pygame.event.pump()
     #Horizontal grey lines
     for i in range(1,150):
         pygame.draw.line(surface,grey,(0,5*i),(900,5*i),1)
@@ -76,6 +81,7 @@ button4=pygame.Rect(930,150,250,30)
 
 ##Bubble sort
 def bubbleSort(arr):
+    pygame.event.pump()
     for i in range(len(arr)):
         for j in range(i, len(arr)):
             if arr[i]>arr[j]:
@@ -89,6 +95,7 @@ def bubbleSort(arr):
 
 ##Selection sort
 def selectionSort(A):
+    pygame.event.pump()
     for i in range(len(A)): 
         min_idx = i
         prev=min_idx
@@ -104,13 +111,15 @@ def selectionSort(A):
         color_array[prev]=green
 
 ##Merge sort
-def mergesort(array, l, r): 
+def mergesort(array, l, r):
+    pygame.event.pump()
     mid =(l + r)//2
     if l<r: 
         mergesort(array, l, mid) 
         mergesort(array, mid + 1, r) 
         merge(array, l, mid,mid + 1, r) 
-def merge(array, x1, y1, x2, y2): 
+def merge(array, x1, y1, x2, y2):
+    pygame.event.pump()
     i = x1 
     j = x2 
     temp =[] 
