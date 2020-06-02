@@ -45,12 +45,7 @@ For now the code contains only three sorting algorithms
 
 ## Instructions
 
-* **For Bubble sort press :arrow_up: on your keyboard**
+**You can press the buttons on the window for respective sorting**
 
-* **For Selection sort press :arrow_down: on your keyboard**
 
-* **For Merge sort press :arrow_left: on your keyboard**
-
-* **Press R on your keyboard to genrate new array.**
-**Note: Let the sorting of arrays done before pressing button**
 
