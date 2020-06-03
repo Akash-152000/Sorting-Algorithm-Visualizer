@@ -25,6 +25,7 @@ git clone https://github.com/Akash-152000/Sorting-Algorithm-Visualizer.git
 ### Prerequisites
 
 Install the required libraries using the below command.
+## Every time you press regenerate new array would be generated.
 ```
 pip install -r requirements.txt
 ```
