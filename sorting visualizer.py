@@ -62,6 +62,7 @@ def draw_lines():
     pygame.draw.rect(surface, red, button2)
     pygame.draw.rect(surface, red, button3)
     pygame.draw.rect(surface, red, button4)
+    pygame.draw.rect(surface, grey,textbox)
     pygame.draw.line(surface,black,(0,0),(1500,0),10)#1st black line    
     pygame.draw.line(surface,black,(900,0),(900,600),6)#1st vertical balck line
     pygame.draw.line(surface,black,(0,600),(1500,600),10)#2nd horiontal black line
@@ -70,12 +71,15 @@ def draw_lines():
     text_("Bubble Sort",button2)
     text_("Selection Sort",button3)
     text_("Merge Sort",button4)
+    text_("Click on the above buttons",textbox)
     
 ##Buttons
 button1=pygame.Rect(930,30,250,30)
 button2=pygame.Rect(930,70,250,30)
 button3=pygame.Rect(930,110,250,30)
 button4=pygame.Rect(930,150,250,30)
+
+textbox=pygame.Rect(930,200,250,30)
     
 ##Sorting algorithms
 
@@ -171,7 +175,17 @@ while gameLoop:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             gameLoop=False
-               
+        if event.type==pygame.KEYDOWN:
+            if event.key==pygame.K_r:
+                generate_array()
+            if event.key==pygame.K_UP:
+                bubbleSort(array)
+            if event.key==pygame.K_DOWN:
+                selectionSort(array)
+            if event.key==pygame.K_LEFT:
+                mergesort(array, 1, len(array)-1)
+
+                
         if event.type==pygame.MOUSEBUTTONDOWN:
             mouse_pos=event.pos
             if button1.collidepoint(mouse_pos):
