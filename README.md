@@ -50,6 +50,6 @@ For now the code contains only three sorting algorithms
 
 **You can press the buttons on the window for respective sorting**
 
-## Every time you press regenerate new array would be generated.
+## Every time you press "regenerate array" button, new array would be generated.
 
 
