@@ -5,6 +5,7 @@ pygame.init()
 
 surface=pygame.display.set_mode((1200,600))
 pygame.display.set_caption("Sorting visualizer")
+clock=pygame.time.Clock()
 
 #Colours
 red=(255,99,71)
@@ -261,4 +262,5 @@ while gameLoop:
     #pygame.draw.rect(surface, [255, 0, 0], button1)  
     draw_lines()
     pygame.display.update()
+    clock.tick(90)
 pygame.quit()
