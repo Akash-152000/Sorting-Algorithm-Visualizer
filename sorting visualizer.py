@@ -221,18 +221,6 @@ while gameLoop:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             gameLoop=False
-        if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_r:
-                generate_array()
-            if event.key==pygame.K_UP:
-                bubbleSort(array)
-            if event.key==pygame.K_DOWN:
-                selectionSort(array)
-            if event.key==pygame.K_LEFT:
-                mergesort(array, 1, len(array)-1)
-            if event.key==pygame.K_RIGHT:
-                heapsort(array, len(array))
-
                 
         if event.type==pygame.MOUSEBUTTONDOWN:
             mouse_pos=event.pos
