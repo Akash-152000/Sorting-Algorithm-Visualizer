@@ -60,11 +60,16 @@ def draw_lines():
     for i in range(1,150):
         pygame.draw.line(surface,color_array[i],(6*i,6),(6*i,array[i]*3),5)
     pygame.draw.rect(surface,grey,(900,0,400,600))
+    if check_sort == True:
+        pygame.draw.rect(surface, grey,text_message)
+        text_("Array is sorted",text_message)
+              
     pygame.draw.rect(surface, red, button1)
     pygame.draw.rect(surface, red, button2)
     pygame.draw.rect(surface, red, button3)
     pygame.draw.rect(surface, red, button4)
     pygame.draw.rect(surface, red, button5)
+    
     pygame.draw.rect(surface, grey,textbox)
     pygame.draw.line(surface,black,(0,0),(1500,0),10)#1st black line    
     pygame.draw.line(surface,black,(900,0),(900,600),6)#1st vertical balck line
@@ -84,6 +89,7 @@ button3=pygame.Rect(930,110,250,30)
 button4=pygame.Rect(930,150,250,30)
 button5=pygame.Rect(930,190,250,30)
 
+text_message=pygame.Rect(350,300,200,50)
 textbox=pygame.Rect(930,240,250,30)
     
 ##Sorting algorithms
@@ -251,7 +257,7 @@ while gameLoop:
                 if event.button==1 and check_sort==False:
                     heapsort(array, len(array))
                     check_sort=True
-                    
+                
     #pygame.draw.rect(surface, [255, 0, 0], button1)  
     draw_lines()
     pygame.display.update()
