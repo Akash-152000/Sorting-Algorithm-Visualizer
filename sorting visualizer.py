@@ -41,6 +41,8 @@ def generate_array():
         array[i]=random.randrange(1,150)
 generate_array()
 
+check_sort=False
+
 def redraw():
     pygame.event.pump()
     surface.fill(white)
@@ -221,29 +223,34 @@ while gameLoop:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             gameLoop=False
+
                 
         if event.type==pygame.MOUSEBUTTONDOWN:
             mouse_pos=event.pos
             if button1.collidepoint(mouse_pos):
                 if event.button==1:
                     generate_array()
+                    check_sort=False
 
             if button2.collidepoint(mouse_pos):
-                if event.button==1:
+                if event.button==1 and check_sort==False:
                     bubbleSort(array)
+                    check_sort=True
 
             if button3.collidepoint(mouse_pos):
-                if event.button==1:
+                if event.button==1 and check_sort==False:
                     selectionSort(array)
+                    check_sort=True
 
             if button4.collidepoint(mouse_pos):
-                if event.button==1:
+                if event.button==1 and check_sort==False:
                     mergesort(array, 1, len(array)-1)
+                    check_sort=True
 
             if button5.collidepoint(mouse_pos):
-                if event.button==1:
+                if event.button==1 and check_sort==False:
                     heapsort(array, len(array))
-
+                    check_sort=True
                     
     #pygame.draw.rect(surface, [255, 0, 0], button1)  
     draw_lines()
