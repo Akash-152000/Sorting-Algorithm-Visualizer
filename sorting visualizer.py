@@ -194,8 +194,8 @@ def heapify(arr, n, i):
         color_array[i] = black
         redraw()
         arr[i], arr[largest] = arr[largest], arr[i]
-        color_array[largest] = green
-        color_array[i] = green
+        color_array[largest] = orange
+        color_array[i] = orange
         redraw()
         heapify(arr, n, largest)
 
