@@ -70,6 +70,7 @@ def draw_lines():
     pygame.draw.rect(surface, red, button3)
     pygame.draw.rect(surface, red, button4)
     pygame.draw.rect(surface, red, button5)
+    pygame.draw.rect(surface, red, button6)
     
     pygame.draw.rect(surface, grey,textbox)
     pygame.draw.line(surface,black,(0,0),(1500,0),10)#1st black line    
@@ -81,6 +82,7 @@ def draw_lines():
     text_("Selection Sort",button3)
     text_("Merge Sort",button4)
     text_("Heap Sort",button5)
+    text_("Quick Sort",button6)
     text_("Click on the above buttons",textbox)
     
 ##Buttons
@@ -89,9 +91,9 @@ button2=pygame.Rect(930,70,250,30)
 button3=pygame.Rect(930,110,250,30)
 button4=pygame.Rect(930,150,250,30)
 button5=pygame.Rect(930,190,250,30)
-
+button6=pygame.Rect(930,230,250,30)
 text_message=pygame.Rect(350,300,200,50)
-textbox=pygame.Rect(930,240,250,30)
+textbox=pygame.Rect(930,280,250,30)
     
 ##Sorting algorithms
 
@@ -222,7 +224,36 @@ def heapsort(arr, n):
         heapify(arr, i, 0)
 
 
-   
+
+## Quick Sort
+def partition(arr, low, high):
+    pivot = arr[high]
+    i = low - 1
+
+    for j in range(low, high+1):
+        color_array[j] = black
+        color_array[high] = blue
+        redraw()
+        color_array[j] = orange
+        if arr[j] < pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+            color_array[i] = orange
+            redraw()
+
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    redraw()
+    return i + 1
+
+
+def quicksort(arr, low, high):
+    if low < high:
+        pi = partition(arr, low, high)
+
+        quicksort(arr, low, pi-1)
+        quicksort(arr, pi+1, high)
+
+
 gameLoop=True
 while gameLoop:
     pygame.event.pump()
@@ -258,7 +289,14 @@ while gameLoop:
                 if event.button==1 and check_sort==False:
                     heapsort(array, len(array))
                     check_sort=True
-                
+            if button6.collidepoint(mouse_pos):
+                if event.button==1:
+                    quicksort(array, 0, len(array)-1)
+                    for i in range(1,150):
+                        color_array[i]=green
+                        redraw()
+                    check_sort=True
+ 
     #pygame.draw.rect(surface, [255, 0, 0], button1)  
     draw_lines()
     pygame.display.update()
