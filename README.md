@@ -25,6 +25,7 @@ git clone https://github.com/Akash-152000/Sorting-Algorithm-Visualizer.git
 ### Prerequisites
 
 Install the required libraries using the below command.
+
 ```
 pip install -r requirements.txt
 ```
@@ -37,20 +38,19 @@ pip install pygame
 ```
 ## Running 
 
-For now the code contains only three sorting algorithms
+For now the code contains only four sorting algorithms
 
 * Bubble Sort
 * Selection Sort
 * Merge Sort
+* Heap Sort
+
+**Other algorithms would be added soon,contributions are most welcome**
 
 ## Instructions
 
-* **For Bubble sort press :arrow_up: on your keyboard**
+**You can press the buttons on the window for respective sorting**
 
-* **For Selection sort press :arrow_down: on your keyboard**
+## Every time you press "regenerate array" button, new array would be generated.
 
-* **For Merge sort press :arrow_left: on your keyboard**
-
-* **Press R on your keyboard to genrate new array.**
-**Note: Let the sorting of arrays done before pressing button**
 

@@ -71,6 +71,7 @@ def draw_lines():
     pygame.draw.rect(surface, red, button4)
     pygame.draw.rect(surface, red, button5)
     pygame.draw.rect(surface, red, button6)
+    
     pygame.draw.rect(surface, grey,textbox)
     pygame.draw.line(surface,black,(0,0),(1500,0),10)#1st black line    
     pygame.draw.line(surface,black,(900,0),(900,600),6)#1st vertical balck line
@@ -223,6 +224,7 @@ def heapsort(arr, n):
         heapify(arr, i, 0)
 
 
+
 ## Quick Sort
 def partition(arr, low, high):
     pivot = arr[high]
@@ -252,7 +254,6 @@ def quicksort(arr, low, high):
         quicksort(arr, pi+1, high)
 
 
-   
 gameLoop=True
 while gameLoop:
     pygame.event.pump()
@@ -288,7 +289,6 @@ while gameLoop:
                 if event.button==1 and check_sort==False:
                     heapsort(array, len(array))
                     check_sort=True
-
             if button6.collidepoint(mouse_pos):
                 if event.button==1:
                     quicksort(array, 0, len(array)-1)
@@ -296,7 +296,7 @@ while gameLoop:
                         color_array[i]=green
                         redraw()
                     check_sort=True
-                
+ 
     #pygame.draw.rect(surface, [255, 0, 0], button1)  
     draw_lines()
     pygame.display.update()
