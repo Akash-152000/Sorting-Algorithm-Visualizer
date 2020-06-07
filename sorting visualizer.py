@@ -63,6 +63,7 @@ def draw_lines():
     pygame.draw.rect(surface, red, button3)
     pygame.draw.rect(surface, red, button4)
     pygame.draw.rect(surface, red, button5)
+    pygame.draw.rect(surface, red, button6)
     pygame.draw.rect(surface, grey,textbox)
     pygame.draw.line(surface,black,(0,0),(1500,0),10)#1st black line    
     pygame.draw.line(surface,black,(900,0),(900,600),6)#1st vertical balck line
@@ -72,8 +73,9 @@ def draw_lines():
     text_("Bubble Sort",button2)
     text_("Selection Sort",button3)
     text_("Merge Sort",button4)
+    text_("Heap Sort",button5)
+    text_("Quick Sort",button6)
     text_("Click on the above buttons",textbox)
-    text_("Quick Sort",button5)
     
 ##Buttons
 button1=pygame.Rect(930,30,250,30)
@@ -81,7 +83,9 @@ button2=pygame.Rect(930,70,250,30)
 button3=pygame.Rect(930,110,250,30)
 button4=pygame.Rect(930,150,250,30)
 button5=pygame.Rect(930,190,250,30)
-textbox=pygame.Rect(930,240,250,30)
+button6=pygame.Rect(930,230,250,30)
+
+textbox=pygame.Rect(930,280,250,30)
     
 ##Sorting algorithms
 
@@ -168,7 +172,80 @@ def merge(array, x1, y1, x2, y2):
 
 
 
+##Heap Sort
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+    if l < n and arr[i] < arr[l]:
+        color_array[i] = blue
+        color_array[l] = black
+        redraw()
+        color_array[i] = orange
+        color_array[l] = orange
+        redraw()
+        largest = l
+    if r < n and arr[i] < arr[r] and arr[l] < arr[r]:
+        color_array[i] = blue
+        color_array[r] = black
+        redraw()
+        color_array[i] = orange
+        color_array[r] = orange
+        redraw()
+        largest = r
+    if largest != i:
+        color_array[largest] = blue
+        color_array[i] = black
+        redraw()
+        arr[i], arr[largest] = arr[largest], arr[i]
+        color_array[largest] = orange
+        color_array[i] = orange
+        redraw()
+        heapify(arr, n, largest)
 
+
+def heapsort(arr, n):
+    pygame.event.pump()
+    for i in range(n//2-1, -1, -1):
+        heapify(arr, n, i)
+
+    for i in range(n-1, 0, -1):
+        color_array[i] = green
+        color_array[0] = green
+        redraw()
+        arr[0], arr[i] = arr[i], arr[0]
+        heapify(arr, i, 0)
+
+
+## Quick Sort
+def partition(arr, low, high):
+    pivot = arr[high]
+    i = low - 1
+
+    for j in range(low, high+1):
+        color_array[j] = black
+        color_array[high] = blue
+        redraw()
+        color_array[j] = orange
+        if arr[j] < pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+            color_array[i] = orange
+            redraw()
+
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    redraw()
+    return i + 1
+
+
+def quicksort(arr, low, high):
+    if low < high:
+        pi = partition(arr, low, high)
+
+        quicksort(arr, low, pi-1)
+        quicksort(arr, pi+1, high)
+
+            
    
 gameLoop=True
 while gameLoop:
@@ -186,6 +263,13 @@ while gameLoop:
                 selectionSort(array)
             if event.key==pygame.K_LEFT:
                 mergesort(array, 1, len(array)-1)
+            if event.key==pygame.K_RIGHT:
+                heapsort(array, len(array))
+            if event.key==pygame.K_ESCAPE:
+                quicksort(array, 0, len(array)-1)
+                for i in range(150):
+                    color_array[i] = green
+                    redraw()
 
                 
         if event.type==pygame.MOUSEBUTTONDOWN:
@@ -208,9 +292,13 @@ while gameLoop:
 
             if button5.collidepoint(mouse_pos):
                 if event.button==1:
-                    pass
+                    heapsort(array, len(array))
 
-      
+            if button6.collidepoint(mouse_pos):
+                if event.button==1:
+                    quicksort(array, 0, len(array)-1)
+
+                    
     #pygame.draw.rect(surface, [255, 0, 0], button1)  
     draw_lines()
     pygame.display.update()
