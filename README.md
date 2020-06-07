@@ -38,12 +38,13 @@ pip install pygame
 ```
 ## Running 
 
-For now the code contains only four sorting algorithms
+For now the code contains only five sorting algorithms
 
 * Bubble Sort
 * Selection Sort
 * Merge Sort
 * Heap Sort
+* Quick Sort
 
 **Other algorithms would be added soon,contributions are most welcome**
 
