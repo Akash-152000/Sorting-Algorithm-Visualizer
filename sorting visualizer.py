@@ -5,6 +5,7 @@ pygame.init()
 
 surface=pygame.display.set_mode((1200,600))
 pygame.display.set_caption("Sorting visualizer")
+clock=pygame.time.Clock()
 
 #Colours
 red=(255,99,71)
@@ -41,6 +42,8 @@ def generate_array():
         array[i]=random.randrange(1,150)
 generate_array()
 
+check_sort=False
+
 def redraw():
     pygame.event.pump()
     surface.fill(white)
@@ -58,6 +61,10 @@ def draw_lines():
     for i in range(1,150):
         pygame.draw.line(surface,color_array[i],(6*i,6),(6*i,array[i]*3),5)
     pygame.draw.rect(surface,grey,(900,0,400,600))
+    if check_sort == True:
+        pygame.draw.rect(surface, grey,text_message)
+        text_("Array is sorted",text_message)
+              
     pygame.draw.rect(surface, red, button1)
     pygame.draw.rect(surface, red, button2)
     pygame.draw.rect(surface, red, button3)
@@ -84,7 +91,7 @@ button3=pygame.Rect(930,110,250,30)
 button4=pygame.Rect(930,150,250,30)
 button5=pygame.Rect(930,190,250,30)
 button6=pygame.Rect(930,230,250,30)
-
+text_message=pygame.Rect(350,300,200,50)
 textbox=pygame.Rect(930,280,250,30)
     
 ##Sorting algorithms
@@ -171,7 +178,6 @@ def merge(array, x1, y1, x2, y2):
             color_array[i]=orange
 
 
-
 ##Heap Sort
 def heapify(arr, n, i):
     largest = i
@@ -245,7 +251,7 @@ def quicksort(arr, low, high):
         quicksort(arr, low, pi-1)
         quicksort(arr, pi+1, high)
 
-            
+
    
 gameLoop=True
 while gameLoop:
@@ -254,22 +260,6 @@ while gameLoop:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             gameLoop=False
-        if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_r:
-                generate_array()
-            if event.key==pygame.K_UP:
-                bubbleSort(array)
-            if event.key==pygame.K_DOWN:
-                selectionSort(array)
-            if event.key==pygame.K_LEFT:
-                mergesort(array, 1, len(array)-1)
-            if event.key==pygame.K_RIGHT:
-                heapsort(array, len(array))
-            if event.key==pygame.K_ESCAPE:
-                quicksort(array, 0, len(array)-1)
-                for i in range(150):
-                    color_array[i] = green
-                    redraw()
 
                 
         if event.type==pygame.MOUSEBUTTONDOWN:
@@ -277,29 +267,38 @@ while gameLoop:
             if button1.collidepoint(mouse_pos):
                 if event.button==1:
                     generate_array()
+                    check_sort=False
 
             if button2.collidepoint(mouse_pos):
-                if event.button==1:
+                if event.button==1 and check_sort==False:
                     bubbleSort(array)
+                    check_sort=True
 
             if button3.collidepoint(mouse_pos):
-                if event.button==1:
+                if event.button==1 and check_sort==False:
                     selectionSort(array)
+                    check_sort=True
 
             if button4.collidepoint(mouse_pos):
-                if event.button==1:
+                if event.button==1 and check_sort==False:
                     mergesort(array, 1, len(array)-1)
+                    check_sort=True
 
             if button5.collidepoint(mouse_pos):
-                if event.button==1:
+                if event.button==1 and check_sort==False:
                     heapsort(array, len(array))
+                    check_sort=True
 
             if button6.collidepoint(mouse_pos):
                 if event.button==1:
                     quicksort(array, 0, len(array)-1)
-
-                    
+                    for i in range(1,150):
+                        color_array[i]=green
+                        redraw()
+                    check_sort=True
+                
     #pygame.draw.rect(surface, [255, 0, 0], button1)  
     draw_lines()
     pygame.display.update()
+    clock.tick(90)
 pygame.quit()
