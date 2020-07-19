@@ -43,8 +43,8 @@ For now the code contains only five sorting algorithms
 * Bubble Sort
 * Selection Sort
 * Merge Sort
-* Heap Sort
 * Quick Sort
+* Heap Sort
 
 **Other algorithms would be added soon,contributions are most welcome**
 
